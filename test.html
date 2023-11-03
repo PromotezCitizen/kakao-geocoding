@@ -1,0 +1,243 @@
+<div id="map" style="width:100%;height:350px;"></div>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(35.2290690522691, 128.763501444443), // 지도의 중심좌표
+        level: 1 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
+// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+var positions = [
+{
+    title: '<div>GS칼텍스 흥일주유소</div>',
+    latlng: new kakao.maps.LatLng(35.212527323063, 128.852741701312)
+}, {
+    title: '<div>국민주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3123872539952, 128.875169124188)
+}, {
+    title: '<div>대감주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2681213028819, 128.980843451838)
+}, {
+    title: '<div>수남주유소</div>',
+    latlng: new kakao.maps.LatLng(35.1751783195726, 128.828096685771)
+}, {
+    title: '<div>중앙주유소</div>',
+    latlng: new kakao.maps.LatLng(35.234404553911, 128.947834359047)
+}, {
+    title: '<div>부성셀프주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2296238091682, 128.918094199442)
+}, {
+    title: '<div>청천주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2567074952882, 128.74968161341)
+}, {
+    title: '<div>나들목주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2170338439683, 128.839554021625)
+}, {
+    title: '<div>굿모닝주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2388454405156, 128.867004919715)
+}, {
+    title: '<div>대현주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3212443300416, 128.765828484275)
+}, {
+    title: '<div>S-OIL (주)행복한식품 펭귄주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2248037576119, 128.926292509195)
+}, {
+    title: '<div>주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2292476431918, 128.898902339302)
+}, {
+    title: '<div>SK엔크린 홀인원주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2807757986679, 128.888335621382)
+}, {
+    title: '<div>한림정주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3116509339228, 128.807717848479)
+}, {
+    title: '<div>골든루트주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2222651675088, 128.824362241956)
+}, {
+    title: '<div>대박주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3352812742501, 128.847418855632)
+}, {
+    title: '<div>S-OIL 한림주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3233334363905, 128.800038427021)
+}, {
+    title: '<div>경남주유소</div>',
+    latlng: new kakao.maps.LatLng(35.200639987679, 128.813365017974)
+}, {
+    title: '<div>참셀프주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2422146914352, 128.877709099371)
+}, {
+    title: '<div>우리동네주유소</div>',
+    latlng: new kakao.maps.LatLng(35.220993425799, 128.809841283254)
+}, {
+    title: '<div>보배주유소</div>',
+    latlng: new kakao.maps.LatLng(128.852741701312, 35.212527323063)
+}, {
+    title: '<div>청강 주유소</div>',
+    latlng: new kakao.maps.LatLng(35.254876432214, 128.766412667688)
+}, {
+    title: '<div>대청주유소</div>',
+    latlng: new kakao.maps.LatLng(35.1878557334254, 128.791102759159)
+}, {
+    title: '<div>부광주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2337792921882, 128.920726509092)
+}, {
+    title: '<div>송진주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2756104060033, 128.842720990869)
+}, {
+    title: '<div>GS칼텍스 우리주유소_대양</div>',
+    latlng: new kakao.maps.LatLng(35.2356380400444, 128.916311783689)
+}, {
+    title: '<div>용담주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2935928398469, 128.762484260014)
+}, {
+    title: '<div>GS칼텍스 대중주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2364513317873, 128.951098618026)
+}, {
+    title: '<div>GS칼텍스 화생주유소</div>',
+    latlng: new kakao.maps.LatLng(35.1946037211899, 128.818527192549)
+}, {
+    title: '<div>신천주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2778982096789, 128.827609103489)
+}, {
+    title: '<div>로드주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2095789052331, 128.799088256861)
+}, {
+    title: '<div>전원주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2879122505947, 128.884584638866)
+}, {
+    title: '<div>대동주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2430557860653, 128.98288408962)
+}, {
+    title: '<div>GS칼텍스 비케이주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3149250799326, 128.944015073731)
+}, {
+    title: '<div>GS칼텍스 용덕주유소_대양</div>',
+    latlng: new kakao.maps.LatLng(35.2977764060216, 128.829968621783)
+}, {
+    title: '<div>GS칼텍스 ㈜산본주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2377656281495, 128.767753965181)
+}, {
+    title: '<div>GS칼텍스 현성주유소_대양</div>',
+    latlng: new kakao.maps.LatLng(35.2284980308944, 128.916497583002)
+}, {
+    title: '<div>삼부주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3064922480775, 128.925926136661)
+}, {
+    title: '<div>술미주유소</div>',
+    latlng: new kakao.maps.LatLng(35.339190805227, 128.781653317709)
+}, {
+    title: '<div>신대진주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2290690522691, 128.763501444443)
+}, {
+    title: '<div>주유소포차</div>',
+    latlng: new kakao.maps.LatLng(35.2626644014475, 128.871214985941)
+}, {
+    title: '<div>세일주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2404649263822, 128.904389094951)
+}, {
+    title: '<div>성림주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2152304199077, 128.889103628914)
+}, {
+    title: '<div>흥동스마트주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2239633655244, 128.871290308066)
+}, {
+    title: '<div>보은주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2287545786636, 128.904603842784)
+}, {
+    title: '<div>대윤주유소</div>',
+    latlng: new kakao.maps.LatLng(35.282835607671, 128.768644577056)
+}, {
+    title: '<div>대박주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3352812742501, 128.847418855632)
+}, {
+    title: '<div>반석주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2295943939761, 128.850071052108)
+}, {
+    title: '<div>내룡주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2905609239085, 128.763153196484)
+}, {
+    title: '<div>이동셀프주유소</div>',
+    latlng: new kakao.maps.LatLng(35.1940253989942, 128.84335865383)
+}, {
+    title: '<div>대한주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2682401576791, 128.755499278634)
+}, {
+    title: '<div>SK엔크린 대광주유소</div>',
+    latlng: new kakao.maps.LatLng(35.2923036475623, 128.883893084092)
+}, {
+    title: '<div>고향주유소</div>',
+    latlng: new kakao.maps.LatLng(35.3024218018305, 128.94820751578)
+}, {
+    title: '<div>태양셀프주유소</div>',
+    latlng: new kakao.maps.LatLng(35.223802506967, 128.871511532263)
+}, {
+    title: '<div>SK엔크린 대영주유소</div>',
+    latlng: new kakao.maps.LatLng(35.22462693445, 128.871684990518)
+}
+];
+
+for (var i = 0; i < positions.length; i ++) {
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng // 마커의 위치
+    });
+
+    // 마커에 표시할 인포윈도우를 생성합니다 
+    var infowindow = new kakao.maps.InfoWindow({
+        content: positions[i].content // 인포윈도우에 표시할 내용
+    });
+
+    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+}
+
+// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+function makeOverListener(map, marker, infowindow) {
+    return function() {
+        infowindow.open(map, marker);
+    };
+}
+
+// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+    };
+}
+
+/* 아래와 같이도 할 수 있습니다 */
+/*
+for (var i = 0; i < positions.length; i ++) {
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng // 마커의 위치
+    });
+
+    // 마커에 표시할 인포윈도우를 생성합니다 
+    var infowindow = new kakao.maps.InfoWindow({
+        content: positions[i].content // 인포윈도우에 표시할 내용
+    });
+
+    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    (function(marker, infowindow) {
+        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
+        kakao.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.open(map, marker);
+        });
+
+        // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
+        kakao.maps.event.addListener(marker, 'mouseout', function() {
+            infowindow.close();
+        });
+    })(marker, infowindow);
+}
+*/
+</script>
